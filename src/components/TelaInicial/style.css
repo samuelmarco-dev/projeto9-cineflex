@@ -1,0 +1,51 @@
+.TelaInicial{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 67px;
+    left: 0;
+    overflow-y: scroll;
+    display: none;
+}
+
+.TelaInicial .topo{
+    width: 100%;
+    height: 67px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto';
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0.04em;
+    text-align: center;
+    color: rgba(41, 56, 69, 1);
+    margin: 5px 0;
+}
+
+.TelaInicial .conteudo{
+    width: 100%;
+    margin-bottom: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.TelaInicial .conteudo figure{
+    width: 145px;
+    height: 209px;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 7px 20px;
+}
+
+.TelaInicial .conteudo figure img{
+    width: 129px;
+    height: 193px;
+}

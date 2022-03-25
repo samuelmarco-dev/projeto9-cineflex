@@ -1,0 +1,8 @@
+*{
+    --cor-de-fundo: rgba(255, 255, 255, 1);
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--cor-de-fundo);
+}
