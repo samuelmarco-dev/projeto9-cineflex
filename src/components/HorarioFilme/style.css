@@ -4,6 +4,7 @@
     position: fixed;
     top: 67px;
     left: 0;
+    display: none;
 }
 
 .HorarioFilme nav{

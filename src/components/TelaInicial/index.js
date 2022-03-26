@@ -5,7 +5,7 @@ import imgFilme from "./../../assets/img/img-filme.png";
 function TelaInicial() {
     return ( 
         <main className="TelaInicial">
-            <div className="topo">Selecione o filme</div>
+            <p className="topo-inicio">Selecione o filme</p>
             <section className="conteudo">
                 <figure>
                     <img src={imgFilme} alt="imagem" />

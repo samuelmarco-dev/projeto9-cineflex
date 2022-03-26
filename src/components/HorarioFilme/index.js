@@ -9,15 +9,7 @@ function HorarioFilme() {
     return ( 
         <section className="HorarioFilme">
             <nav>
-                <div className="topo-filmes">Selecione o horário</div>
-                <div className="sessao">
-                        <p>Quinta-feira - 24/06/2021</p>
-                        <div className="botoes-horario">
-                            <Botao classe="botao" texto="14:00"/>
-                            <Botao classe="botao" texto="16:00"/>
-                            <Botao classe="botao" texto="18:00"/>
-                        </div>
-                </div>
+                <p className="topo-filmes">Selecione o horário</p>
                 <div className="sessao">
                         <p>Quinta-feira - 24/06/2021</p>
                         <div className="botoes-horario">
