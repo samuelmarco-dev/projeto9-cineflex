@@ -4,6 +4,7 @@ import axios from "axios";
 import ParagrafoTopo from "../ParagrafoTopo";
 
 import "./style.css";
+import { Link } from "react-router-dom";
 
 function TelaInicial() {
     const [listaFilmes, setListaFilmes] = useState([]);
@@ -30,9 +31,11 @@ function TelaInicial() {
                 {
                     listaFilmes.map((filme, index)=>{
                     return (
-                        <figure key={index} id={filme.id} title={filme.title}>
-                            <img src={filme.posterURL} alt={filme.title} />
-                        </figure>
+                        <Link to={`/sessoes/${filme.id}`}>
+                            <figure key={index} id={filme.id} title={filme.title}>
+                                <img src={filme.posterURL} alt={filme.title} />
+                            </figure>
+                        </Link>
                     )
                     })
                 }
