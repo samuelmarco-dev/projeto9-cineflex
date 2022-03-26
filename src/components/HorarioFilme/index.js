@@ -1,16 +1,49 @@
+import Botao from "../Botao";
+import Footer from "../Footer";
+
+import imgFilme from "./../../assets/img/img-filme.png"
+
 import "./style.css"
 
 function HorarioFilme() {
     return ( 
         <section className="HorarioFilme">
-            <div className="topo-filmes">Selecione o horário</div>
-            <article>
+            <nav>
+                <div className="topo-filmes">Selecione o horário</div>
                 <div className="sessao">
-                    <div>aqui uma sessão</div>
-                    <div>aqui uma sessão</div>
+                        <p>Quinta-feira - 24/06/2021</p>
+                        <div className="botoes-horario">
+                            <Botao classe="botao" texto="14:00"/>
+                            <Botao classe="botao" texto="16:00"/>
+                            <Botao classe="botao" texto="18:00"/>
+                        </div>
                 </div>
-            </article>
-            <footer>xxxxx</footer>
+                <div className="sessao">
+                        <p>Quinta-feira - 24/06/2021</p>
+                        <div className="botoes-horario">
+                            <Botao classe="botao" texto="14:00"/>
+                            <Botao classe="botao" texto="16:00"/>
+                            <Botao classe="botao" texto="18:00"/>
+                        </div>
+                </div>
+                <div className="sessao">
+                        <p>Quinta-feira - 24/06/2021</p>
+                        <div className="botoes-horario">
+                            <Botao classe="botao" texto="14:00"/>
+                            <Botao classe="botao" texto="16:00"/>
+                            <Botao classe="botao" texto="18:00"/>
+                        </div>
+                </div>
+                <div className="sessao">
+                        <p>Quinta-feira - 24/06/2021</p>
+                        <div className="botoes-horario">
+                            <Botao classe="botao" texto="14:00"/>
+                            <Botao classe="botao" texto="16:00"/>
+                            <Botao classe="botao" texto="18:00"/>
+                        </div>
+                </div>
+            </nav>
+            <Footer nomeFilme="Enola Holmes" imagem={imgFilme} />
         </section>
     );
 }

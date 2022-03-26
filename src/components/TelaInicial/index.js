@@ -1,6 +1,6 @@
 import "./style.css"
 
-import imgFilme from "./../../assets/img/img-filme.png"
+import imgFilme from "./../../assets/img/img-filme.png";
 
 function TelaInicial() {
     return ( 
