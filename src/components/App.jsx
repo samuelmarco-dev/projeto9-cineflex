@@ -4,6 +4,7 @@ import Topo from "./Header";
 import TelaInicial from "./TelaInicial";
 import HorarioFilme from "./HorarioFilme";
 import AssentosFilme from "./AssentosFilme";
+import TelaDePedido from "./TelaDePedido";
 
 import "../assets/css/reset.css";
 import "../assets/css/style.css";
@@ -21,10 +22,11 @@ function App() {
 
     return ( 
         <>
-        <Topo />
-        <TelaInicial />
-        <HorarioFilme />
-        <AssentosFilme />
+            <Topo />
+            <TelaInicial />
+            <HorarioFilme />
+            <AssentosFilme />
+            <TelaDePedido />
         </>
     );
 }

@@ -1,11 +1,12 @@
-import "./style.css"
+import ParagrafoTopo from "../ParagrafoTopo";
 
 import imgFilme from "./../../assets/img/img-filme.png";
+import "./style.css";
 
 function TelaInicial() {
     return ( 
         <main className="TelaInicial">
-            <p className="topo-inicio">Selecione o filme</p>
+            <ParagrafoTopo classe="topo-inicio" texto="Selecione o filme" />
             <section className="conteudo">
                 <figure>
                     <img src={imgFilme} alt="imagem" />

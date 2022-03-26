@@ -1,5 +1,6 @@
 import Botao from "../Botao";
 import Footer from "../Footer";
+import ParagrafoTopo from "../ParagrafoTopo";
 
 import imgFilme from "./../../assets/img/img-filme.png"
 
@@ -9,7 +10,7 @@ function HorarioFilme() {
     return ( 
         <section className="HorarioFilme">
             <nav>
-                <p className="topo-filmes">Selecione o horário</p>
+                <ParagrafoTopo classe="topo-filmes" texto="Selecione o horário" />
                 <div className="sessao">
                         <p>Quinta-feira - 24/06/2021</p>
                         <div className="botoes-horario">

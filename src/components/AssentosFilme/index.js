@@ -1,5 +1,6 @@
 import Botao from "../Botao";
 import Footer from "../Footer";
+import ParagrafoTopo from "../ParagrafoTopo";
 
 import imgFilme from "./../../assets/img/img-filme.png";
 
@@ -9,7 +10,7 @@ function AssentosFilme() {
     return ( 
         <section className="AssentosFilme">
             <nav>
-                <p className="topo-assentos">Selecione o(s) assento(s)</p>
+                <ParagrafoTopo classe="topo-assentos" texto="Selecione o(s) assento(s)" />
                 <div className="selecionar-assentos">
                     <div className="assento disponivel">01</div>
                     <div className="assento disponivel">01</div>
