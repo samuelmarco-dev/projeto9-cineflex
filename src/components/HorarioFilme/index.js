@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import Botao from "../Botao";
 import Footer from "../Footer";
@@ -41,9 +41,9 @@ function HorarioFilme() {
                                 <div className="botoes-horario">
                                 {day.showtimes.map((item) => {
                                     return (
-                                        <div key={item.id}>
+                                        <Link to={`/assentos/${item.id}`} key={item.id}>
                                             <Botao classe="botao" texto={item.name}/>
-                                        </div>
+                                        </Link>
                                     )
                                 })}
                                 </div>
