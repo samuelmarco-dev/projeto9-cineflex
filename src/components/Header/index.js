@@ -1,8 +1,11 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function Topo() {
     return ( 
-        <Header>CINEFLEX</Header>
+        <Link to="/">
+            <Header>CINEFLEX</Header>
+        </Link>
      );
 }
 

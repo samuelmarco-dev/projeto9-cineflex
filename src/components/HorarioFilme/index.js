@@ -22,43 +22,41 @@ function HorarioFilme() {
             console.log(error.response);
         })
     }
-
+    
     useEffect(()=>{
         obterIdFilme();
+        // eslint-disable-next-line
     }, []);
 
-    return ( 
-        <section className="HorarioFilme">
-            <nav>
-                <ParagrafoTopo classe="topo-filmes" texto="Selecione o horário" />
-                <div className="sessao">
-                        <p>Quinta-feira - 24/06/2021</p>
-                        <div className="botoes-horario">
-                            <Botao classe="botao" texto="14:00"/>
-                            <Botao classe="botao" texto="16:00"/>
-                            <Botao classe="botao" texto="18:00"/>
-                        </div>
-                </div>
-                <div className="sessao">
-                        <p>Quinta-feira - 24/06/2021</p>
-                        <div className="botoes-horario">
-                            <Botao classe="botao" texto="14:00"/>
-                            <Botao classe="botao" texto="16:00"/>
-                            <Botao classe="botao" texto="18:00"/>
-                        </div>
-                </div>
-                <div className="sessao">
-                        <p>Quinta-feira - 24/06/2021</p>
-                        <div className="botoes-horario">
-                            <Botao classe="botao" texto="14:00"/>
-                            <Botao classe="botao" texto="16:00"/>
-                            <Botao classe="botao" texto="18:00"/>
-                        </div>
-                </div>
-            </nav>
-            <Footer nomeFilme={horarioFilme.title} imagem={horarioFilme.posterURL} />
-        </section>
-    );
+    if(Object.keys(horarioFilme).length > 0){
+        const {title, posterURL, days, id} = horarioFilme;
+        return ( 
+            <section className="HorarioFilme" id={id}>
+                <nav>
+                    <ParagrafoTopo classe="topo-filmes" texto="Selecione o horário" />
+                    {days.map((day)=> {
+                        return(
+                            <div className="sessao" key={day.id}>
+                                <p>{`${day.weekday} - ${day.date}`}</p>
+                                <div className="botoes-horario">
+                                {day.showtimes.map((item) => {
+                                    return (
+                                        <div key={item.id}>
+                                            <Botao classe="botao" texto={item.name}/>
+                                        </div>
+                                    )
+                                })}
+                                </div>
+                            </div>
+                        )
+                    })}
+                </nav>
+                <Footer nomeFilme={title} imagem={posterURL} alt={title}/>
+            </section>
+        );
+    }else{
+        return <></>
+    }
 }
 
 export default HorarioFilme;

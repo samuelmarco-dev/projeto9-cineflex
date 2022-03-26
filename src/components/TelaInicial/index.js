@@ -31,8 +31,8 @@ function TelaInicial() {
                 {
                     listaFilmes.map((filme, index)=>{
                     return (
-                        <Link to={`/sessoes/${filme.id}`}>
-                            <figure key={index} id={filme.id} title={filme.title}>
+                        <Link to={`/sessoes/${filme.id}`} key={index}>
+                            <figure id={filme.id} title={filme.title}>
                                 <img src={filme.posterURL} alt={filme.title} />
                             </figure>
                         </Link>
