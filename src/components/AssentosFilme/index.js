@@ -9,7 +9,7 @@ import ParagrafoTopo from "../ParagrafoTopo";
 import "./style.css";
 
 function AssentosFilme() {
-    const[assentosSessao, setAssentosSessao] = useState({});
+    const [assentosSessao, setAssentosSessao] = useState({});
     const {idSessao} = useParams();
 
     function obterIdSessao(){
@@ -30,7 +30,20 @@ function AssentosFilme() {
 
     console.log(assentosSessao);
 
-    
+    function mascaraDeCPF(cpf){
+        return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
+    }
+
+    function mascaraDeNome(nome){
+        if(nome.includes('0') === true || nome.includes('1') === true || nome.includes('2') === true || nome.includes('3') === true || 
+        nome.includes('4') === true || nome.includes('5') === true || nome.includes('6') === true || nome.includes('7') === true || 
+        nome.includes('8') === true || nome.includes('9') === true){
+            nome = false;
+        }else{
+            nome = true;
+        }
+    }
+
     if(Object.keys(assentosSessao).length > 0){
         const {day, movie, seats} = assentosSessao;
 
@@ -43,7 +56,8 @@ function AssentosFilme() {
                             if(seat.isAvailable === true){
                                 return <div className="assento disponivel" key={seat.id}>{seat.name}</div>
                             }else{
-                                return <div className="assento indisponivel" key={seat.id}>{seat.name}</div>
+                                return <div className="assento indisponivel" 
+                                key={seat.id} onClick={()=>alert('Esse assento não está disponível')}>{seat.name}</div>
                             }
                         })}
                     </div>
