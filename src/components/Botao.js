@@ -1,5 +1,5 @@
-function Botao({classe, texto}) {
-    return ( <button className={classe}>{texto}</button> );
+function Botao({classe, texto, click}) {
+    return ( <button className={classe} onClick={click}>{texto}</button> );
 }
 
 export default Botao;

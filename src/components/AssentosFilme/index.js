@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Botao from "../Botao";
 import Footer from "../Footer";
@@ -10,7 +10,12 @@ import "./style.css";
 
 function AssentosFilme() {
     const [assentosSessao, setAssentosSessao] = useState({});
+    const [assentosEscolhidos, setAssentosEscolhidos] = useState([]);
     const {idSessao} = useParams();
+
+    const [nome, setNome] = useState('');
+    const [cpf, setCPF] = useState('');
+    const navigate = useNavigate();
 
     function obterIdSessao(){
         axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`)
@@ -30,8 +35,10 @@ function AssentosFilme() {
 
     console.log(assentosSessao);
 
-    function mascaraDeCPF(cpf){
-        return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
+    function mascaraDeCPF(cpfDigitado){
+        if(cpfDigitado.length === 14){
+            return cpfDigitado.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
+        }
     }
 
     function mascaraDeNome(nome){
@@ -42,7 +49,30 @@ function AssentosFilme() {
         }else{
             nome = true;
         }
+        return nome
     }
+
+    function postarDados(event){
+        event.preventDefault();
+        axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', {
+            ids: [1, 2, 3],
+            name: nome,
+            cpf: cpf
+        })
+        .then((response)=>{
+            console.log(response.data);
+            navigate("/sucesso");
+        })
+        .catch((error)=>{
+            console.log(error.response);
+        })
+    }
+
+    function selecionarAssentos(assento){
+        setAssentosEscolhidos([...assentosEscolhidos, assento]);
+    }
+
+    console.log(assentosEscolhidos)
 
     if(Object.keys(assentosSessao).length > 0){
         const {day, movie, seats} = assentosSessao;
@@ -54,7 +84,14 @@ function AssentosFilme() {
                     <div className="selecionar-assentos">
                         {seats.map((seat)=>{
                             if(seat.isAvailable === true){
-                                return <div className="assento disponivel" key={seat.id}>{seat.name}</div>
+                                if(assentosEscolhidos.includes(seat) === false){
+                                    return <div className={`assento disponivel`} key={seat.id}
+                                    onClick={()=> selecionarAssentos(seat)}>{seat.name}</div>
+                                }
+                                if(assentosEscolhidos.includes(seat) === true){
+                                    return <div className={`assento selecionado`} key={seat.id}
+                                    onClick={()=> selecionarAssentos(seat)}>{seat.name}</div>
+                                }
                             }else{
                                 return <div className="assento indisponivel" 
                                 key={seat.id} onClick={()=>alert('Esse assento não está disponível')}>{seat.name}</div>
@@ -78,17 +115,27 @@ function AssentosFilme() {
                             <p>Indisponível</p>
                         </article>
                     </div>
-                    <form>
+                    <form onSubmit={postarDados}>
                         <div className="informacoes-usuario">
                             <p>Nome do comprador:</p>
-                            <input type="text" placeholder="Digite seu nome..."/>
+                            <input type="text" placeholder="Digite seu nome..." required 
+                            onChange={(e)=>{
+                                setNome(e.target.value);
+                                }}/>
                         </div>
                         <div className="informacoes-usuario">
                             <p>CPF do comprador:</p>
-                            <input type="text" placeholder="Digite seu CPF..."/>
+                            <input type="text" placeholder="Digite seu CPF..." required 
+                            value={cpf} onChange={(e)=>{
+                                setCPF(e.target.value);
+                                mascaraDeCPF(cpf)
+                            }}/>
                         </div>
                         <div className="botao">
-                            <Botao texto="Reservar assento(s)" />
+                            <Botao texto="Reservar assento(s)" click={()=>{
+                                setNome('');
+                                setCPF('');
+                            }}/>
                         </div>
                     </form>
                 </nav>
