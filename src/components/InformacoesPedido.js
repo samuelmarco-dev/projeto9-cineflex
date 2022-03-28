@@ -1,5 +1,5 @@
 function InformacoesPedido(props) {
-    const {classe, paragrafo, div, titulo, texto, info} = props
+    const {classe, paragrafo, div, titulo, texto, info, extra} = props
     
     return ( 
         <div className={classe}>
@@ -7,6 +7,7 @@ function InformacoesPedido(props) {
             <div className={div}>
                 <p>{texto}</p>
                 <p>{info}</p>
+                <p>{extra}</p>
             </div>
         </div>
     );

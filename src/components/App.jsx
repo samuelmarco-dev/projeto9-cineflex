@@ -16,13 +16,13 @@ function App() {
     return ( 
         <BrowserRouter>
         <Topo />
-        <Routes>
-            <Route path="/" element={<TelaInicial />}/>
-            <Route path="/sessoes/:idFilme" element={<HorarioFilme />}/>
-            <Route path="/assentos/:idSessao" element={<AssentosFilme setInfoIngresso={setInfoIngresso}/>}/>
-            <Route path="/sucesso" element={<TelaDePedido {...infoIngresso} />}/>
-        </Routes>
-    </BrowserRouter>
+            <Routes>
+                <Route path="/" element={<TelaInicial />}/>
+                <Route path="/sessoes/:idFilme" element={<HorarioFilme />}/>
+                <Route path="/assentos/:idSessao" element={<AssentosFilme setInfoIngresso={setInfoIngresso}/>}/>
+                <Route path="/sucesso" element={<TelaDePedido {...infoIngresso} />}/>
+            </Routes>
+        </BrowserRouter>
     );
 }
 

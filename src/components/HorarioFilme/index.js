@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import Botao from "../Botao";
 import Footer from "../Footer";
 import ParagrafoTopo from "../ParagrafoTopo";
+import Loading from "../Loading";
 
 import "./style.css"
 
@@ -55,7 +56,7 @@ function HorarioFilme() {
             </section>
         );
     }else{
-        return <></>
+        return <Loading />
     }
 }
 

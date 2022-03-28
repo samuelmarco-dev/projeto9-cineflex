@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Botao from "../Botao";
 import Footer from "../Footer";
 import ParagrafoTopo from "../ParagrafoTopo";
+import Loading from "../Loading";
 
 import "./style.css";
 
@@ -65,7 +66,7 @@ function AssentosFilme({setInfoIngresso}) {
             console.log(response.data);
             setInfoIngresso({
                 nomeFilme: assentosSessao.movie.title, data: assentosSessao.day.date, horario: assentosSessao.name, 
-                assentos: assentosEscolhidos, nome: nomeUsuario, cpf: cpf
+                diaSemana: assentosSessao.day.weekday, assentos: assentosEscolhidos, nome: nomeUsuario, cpf: cpf
             })
             navigate("/sucesso");
         })
@@ -163,7 +164,7 @@ function AssentosFilme({setInfoIngresso}) {
         );
     }
     else{
-        return <></>
+        return <Loading />
     }
 
 }

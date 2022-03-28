@@ -1,10 +1,13 @@
-import InformacoesPedido from "../InformacoesPedido";
-import Botao from "../Botao";
-import "./style.css"
 import { Link } from "react-router-dom";
 
+import InformacoesPedido from "../InformacoesPedido";
+import Botao from "../Botao";
+import Loading from "../Loading";
+
+import "./style.css"
+
 function TelaDePedido(props) {
-    const {nomeFilme, data, horario, nome, cpf, assentos} = props;
+    const {nomeFilme, data, horario, nome, cpf, assentos, diaSemana} = props;
 
     if(Object.keys(props).length > 0){
         return ( 
@@ -14,7 +17,7 @@ function TelaDePedido(props) {
                 </header>
                 <InformacoesPedido classe="filme-sessao" paragrafo="sessao" 
                 div="informacoes-adicionais" titulo="Filme e sessão" 
-                texto={nomeFilme} info={`${data} ${horario}`}/>
+                texto={nomeFilme} info={`${data} ${horario}`} extra={diaSemana}/>
                 <div className="ingressos">
                     <p className="sessao">Ingressos</p>
                     <div className="informacoes-adicionais">
@@ -23,8 +26,6 @@ function TelaDePedido(props) {
                                 <p key={index}>{`Assento ${item.name}`}</p>
                             )
                         })} 
-                        <p>Assento 15</p>
-                        <p>Assento 16</p>
                     </div>
                 </div>
                 <InformacoesPedido classe="comprador" paragrafo="sessao" 
@@ -38,7 +39,7 @@ function TelaDePedido(props) {
             </section> 
         );
     }else{
-        return <></>
+        return <Loading />
     }
 
 }
