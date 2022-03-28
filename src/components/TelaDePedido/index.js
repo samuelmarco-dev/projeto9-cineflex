@@ -2,7 +2,7 @@ import InformacoesPedido from "../InformacoesPedido";
 import Botao from "../Botao";
 import "./style.css"
 
-function TelaDePedido() {
+function TelaDePedido(props) {
     return ( 
         <section className="TelaDePedido">
             <header>

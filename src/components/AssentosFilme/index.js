@@ -13,9 +13,10 @@ function AssentosFilme() {
     const [assentosEscolhidos, setAssentosEscolhidos] = useState([]);
     const {idSessao} = useParams();
 
-    const [nome, setNome] = useState('');
+    const [nomeUsuario, setNomeUsuario] = useState('');
     const [cpf, setCPF] = useState('');
     const navigate = useNavigate();
+    let postObj = null;
 
     function obterIdSessao(){
         axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`)
@@ -35,41 +36,56 @@ function AssentosFilme() {
 
     console.log(assentosSessao);
 
-    function mascaraDeCPF(cpfDigitado){
-        if(cpfDigitado.length === 14){
-            return cpfDigitado.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
-        }
-    }
-
-    function mascaraDeNome(nome){
-        if(nome.includes('0') === true || nome.includes('1') === true || nome.includes('2') === true || nome.includes('3') === true || 
-        nome.includes('4') === true || nome.includes('5') === true || nome.includes('6') === true || nome.includes('7') === true || 
-        nome.includes('8') === true || nome.includes('9') === true){
-            nome = false;
-        }else{
-            nome = true;
-        }
-        return nome
-    }
-
     function postarDados(event){
         event.preventDefault();
-        axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', {
-            ids: [1, 2, 3],
-            name: nome,
-            cpf: cpf
-        })
+        const arrayAssentos = assentosEscolhidos.map((assento) => assento.id);
+        postObj = {
+            ids: arrayAssentos,
+            name: nomeUsuario,
+            cpf: mascaraCPF(cpf)
+        }
+
+        if(postObj.name === '' || (postObj.cpf === '' || (postObj.cpf.includes('a') === true || postObj.cpf.includes('b') === true || 
+        postObj.cpf.includes('c') === true || postObj.cpf.includes('d') === true || postObj.cpf.includes('e') === true || postObj.cpf.includes('f') === true || 
+        postObj.cpf.includes('g') === true || postObj.cpf.includes('h') === true || postObj.cpf.includes('i') === true || postObj.cpf.includes('j') === true || 
+        postObj.cpf.includes('k') === true || postObj.cpf.includes('l') === true || postObj.cpf.includes('m') === true || postObj.cpf.includes('n') === true || 
+        postObj.cpf.includes('o') === true || postObj.cpf.includes('p') === true || postObj.cpf.includes('q') === true || postObj.cpf.includes('r') === true || 
+        postObj.cpf.includes('s') === true || postObj.cpf.includes('t') === true || postObj.cpf.includes('u') === true || postObj.cpf.includes('v') === true || 
+        postObj.cpf.includes('w') === true || postObj.cpf.includes('x') === true || postObj.cpf.includes('y') === true || postObj.cpf.includes('z') === true )) 
+        || postObj.ids.length === 0){
+            alert('Preencha os dados novamente, inserindo ao menos um assento na sessão seu nome e sobrenome e CPF (XXX.XXX.XXX-XX)');
+            setNomeUsuario('');
+            setCPF('');
+            return
+        }
+
+        axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', postObj)
         .then((response)=>{
             console.log(response.data);
             navigate("/sucesso");
         })
         .catch((error)=>{
-            console.log(error.response);
+            alert('Preencha os dados novamente');
         })
-    }
+        console.log(postObj);
+        setNomeUsuario('');
+        setCPF('');
+      }
+
 
     function selecionarAssentos(assento){
+        if(assentosEscolhidos.includes(assento) === true){
+            const arrayToggleFiltrado = assentosEscolhidos.filter((remover)=>{
+                return remover.id !== assento.id
+            })
+            setAssentosEscolhidos(arrayToggleFiltrado);
+            return;
+        }
         setAssentosEscolhidos([...assentosEscolhidos, assento]);
+    }
+
+    function mascaraCPF(cpfDigitado) {
+        return cpfDigitado.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
     }
 
     console.log(assentosEscolhidos)
@@ -118,24 +134,20 @@ function AssentosFilme() {
                     <form onSubmit={postarDados}>
                         <div className="informacoes-usuario">
                             <p>Nome do comprador:</p>
-                            <input type="text" placeholder="Digite seu nome..." required 
-                            onChange={(e)=>{
-                                setNome(e.target.value);
+                            <input type="text" placeholder="Digite seu nome..." required
+                            value={nomeUsuario} maxLength='30' onChange={(e)=>{
+                                setNomeUsuario(e.target.value);
                                 }}/>
                         </div>
                         <div className="informacoes-usuario">
                             <p>CPF do comprador:</p>
-                            <input type="text" placeholder="Digite seu CPF..." required 
-                            value={cpf} onChange={(e)=>{
+                            <input type="text" placeholder="Digite seu CPF..." required
+                            value={cpf} maxLength='14' onChange={(e)=>{
                                 setCPF(e.target.value);
-                                mascaraDeCPF(cpf)
                             }}/>
                         </div>
                         <div className="botao">
-                            <Botao texto="Reservar assento(s)" click={()=>{
-                                setNome('');
-                                setCPF('');
-                            }}/>
+                            <Botao texto="Reservar assento(s)" tipo="submit" />
                         </div>
                     </form>
                 </nav>
