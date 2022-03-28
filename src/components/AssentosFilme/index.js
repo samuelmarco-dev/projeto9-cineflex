@@ -9,7 +9,7 @@ import ParagrafoTopo from "../ParagrafoTopo";
 
 import "./style.css";
 
-function AssentosFilme() {
+function AssentosFilme({setInfoIngresso}) {
     const [assentosSessao, setAssentosSessao] = useState({});
     const [assentosEscolhidos, setAssentosEscolhidos] = useState([]);
     const {idSessao} = useParams();
@@ -63,9 +63,14 @@ function AssentosFilme() {
         axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', postObj)
         .then((response)=>{
             console.log(response.data);
+            setInfoIngresso({
+                nomeFilme: assentosSessao.movie.title, data: assentosSessao.day.date, horario: assentosSessao.name, 
+                assentos: assentosEscolhidos, nome: nomeUsuario, cpf: cpf
+            })
             navigate("/sucesso");
         })
         .catch((error)=>{
+            console.log(error.response)
             alert('Preencha os dados novamente');
         })
         console.log(postObj);
