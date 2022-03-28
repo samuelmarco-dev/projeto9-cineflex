@@ -32,11 +32,9 @@ function AssentosFilme({setInfoIngresso}) {
     }
 
     useEffect(() => {
-        obterIdSessao()
+        obterIdSessao();
         // eslint-disable-next-line
     }, []);
-
-    console.log(assentosSessao);
 
     function postarDados(event){
         event.preventDefault();
@@ -74,7 +72,7 @@ function AssentosFilme({setInfoIngresso}) {
         })
         setNomeUsuario('');
         setCPF('');
-      }
+    }
 
 
     function selecionarAssentos(assento){
@@ -91,8 +89,6 @@ function AssentosFilme({setInfoIngresso}) {
     function mascaraCPF(cpfDigitado) {
         return cpfDigitado.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
     }
-
-    console.log(assentosEscolhidos)
 
     if(Object.keys(assentosSessao).length > 0){
         const {day, movie, seats} = assentosSessao;
