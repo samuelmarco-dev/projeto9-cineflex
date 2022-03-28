@@ -146,7 +146,7 @@ function AssentosFilme({setInfoIngresso}) {
                         <div className="informacoes-usuario">
                             <p>CPF do comprador:</p>
                             <input type="text" placeholder="Digite seu CPF..." required
-                            value={cpf} maxLength='14' onChange={(e)=>{
+                            value={cpf} minLength='14' maxLength='14' onChange={(e)=>{
                                 setCPF(e.target.value);
                             }}/>
                         </div>
