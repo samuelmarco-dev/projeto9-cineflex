@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import swal from "sweetalert";
 
 import ParagrafoTopo from "../ParagrafoTopo";
 
@@ -13,11 +14,10 @@ function TelaInicial() {
     function obterListaDeFilmes(){
         axios.get('https://mock-api.driven.com.br/api/v5/cineflex/movies')
         .then((response)=>{
-            console.log(response.data);
             setListaFilmes(response.data);
         })
         .catch((error)=>{
-            console.log(error.response);
+            swal("Erro ao obter a lista de filmes");
         })
     }
 

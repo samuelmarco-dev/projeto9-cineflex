@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import swal from "sweetalert";
 
 import Botao from "../Botao";
 import Footer from "../Footer";
@@ -16,11 +17,10 @@ function HorarioFilme() {
     function obterIdFilme(){
         axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`)
         .then((response)=> {
-            console.log(response.data);
             setHorarioFilme(response.data);
         })
         .catch((error)=>{
-            console.log(error.response);
+            swal("Erro ao obter os dados do filme");
         })
     }
     

@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import swal from "sweetalert";
 
 import Botao from "../Botao";
 import Footer from "../Footer";
@@ -23,11 +24,10 @@ function AssentosFilme({setInfoIngresso}) {
     function obterIdSessao(){
         axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`)
         .then((response)=>{
-            console.log(response.data);
             setAssentosSessao(response.data);
         })
         .catch((error)=>{
-            console.log(error.response);
+            swal("Erro ao obter os assentos da sessão");
         })
     }
 
@@ -55,7 +55,7 @@ function AssentosFilme({setInfoIngresso}) {
         postObj.cpf.includes('s') === true || postObj.cpf.includes('t') === true || postObj.cpf.includes('u') === true || postObj.cpf.includes('v') === true || 
         postObj.cpf.includes('w') === true || postObj.cpf.includes('x') === true || postObj.cpf.includes('y') === true || postObj.cpf.includes('z') === true )) 
         || postObj.ids.length === 0){
-            alert('Preencha os dados novamente, inserindo ao menos um assento na sessão seu nome e sobrenome e CPF (XXX.XXX.XXX-XX)');
+            swal('Preencha os dados novamente, inserindo ao menos um assento na sessão seu nome e sobrenome e CPF (XXX.XXX.XXX-XX)');
             setNomeUsuario('');
             setCPF('');
             return
@@ -63,7 +63,6 @@ function AssentosFilme({setInfoIngresso}) {
 
         axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', postObj)
         .then((response)=>{
-            console.log(response.data);
             setInfoIngresso({
                 nomeFilme: assentosSessao.movie.title, data: assentosSessao.day.date, horario: assentosSessao.name, 
                 diaSemana: assentosSessao.day.weekday, assentos: assentosEscolhidos, nome: nomeUsuario, cpf: cpf
@@ -71,10 +70,8 @@ function AssentosFilme({setInfoIngresso}) {
             navigate("/sucesso");
         })
         .catch((error)=>{
-            console.log(error.response)
-            alert('Preencha os dados novamente');
+            swal('Erro ao reservar os assentos nesta sessão de cinema');
         })
-        console.log(postObj);
         setNomeUsuario('');
         setCPF('');
       }
@@ -117,7 +114,7 @@ function AssentosFilme({setInfoIngresso}) {
                                 }
                             }else{
                                 return <div className="assento indisponivel" 
-                                key={seat.id} onClick={()=>alert('Esse assento não está disponível')}>{seat.name}</div>
+                                key={seat.id} onClick={()=>swal('Esse assento não está disponível')}>{seat.name}</div>
                             }
                         })}
                     </div>
