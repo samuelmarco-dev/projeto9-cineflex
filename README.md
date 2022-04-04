@@ -2,7 +2,7 @@
 
 ![alt text](./src/assets/img/layout.jpg)
 
-# Requisitos do proeto
+# Requisitos do projeto
 
 ### Escolha de Filme (rota "/")
 - [x]  Buscar as informações dos filmes pela API fornecida e exibir conforme layout fornecido
